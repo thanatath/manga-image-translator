@@ -1,0 +1,1 @@
+python -m manga_translator -v --mode batch --font-size-offset 4 --use-cuda-limited --text-mag-ratio 4 --inpainting-size 1024 --font-size-minimum 18 --translator=google -l TH -i "D:\FILE Download\地 下展示室02_擬音あり\t"

@@ -24,6 +24,7 @@ class PapagoTranslator(CommonTranslator):
         'PTB': 'pt',
         'RUS': 'ru',
         'ESP': 'es',
+        'TH': 'th',
     }
     _API_URL = 'https://papago.naver.com/apis/n2mt/translate'
 

@@ -33,6 +33,7 @@ class BaiduTranslator(CommonTranslator):
         'ROM': 'rom',
         'RUS': 'ru',
         'ESP': 'spa',
+        'TH': 'th',
     }
 
     def __init__(self) -> None:

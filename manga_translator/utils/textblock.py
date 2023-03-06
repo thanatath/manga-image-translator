@@ -31,6 +31,7 @@ LANGAUGE_ORIENTATION_PRESETS = {
     'ESP': 'h',
     'TRK': 'h',
     'VIN': 'h',
+    'TH': 'h',
 }
 
 class TextBlock(object):
@@ -247,7 +248,7 @@ class TextBlock(object):
 
     @property
     def direction(self):
-        """Render direction which is set depending on used language or aspect ratio."""
+        """Render direction determined through used language or aspect ratio."""
         if self._direction not in ('h', 'v'):
             if self.target_lang in LANGAUGE_ORIENTATION_PRESETS:
                 d = LANGAUGE_ORIENTATION_PRESETS[self.target_lang]
@@ -270,36 +271,40 @@ class TextBlock(object):
 
     @property
     def alignment(self):
-        """Can be left, center or right"""
-        # TODO: Finish implementation
+        """Render alignment determined through used language."""
         if self._alignment in ('left', 'center', 'right'):
             return self._alignment
         if len(self.lines) == 1:
             return 'center'
 
-        x1, y1, x2, y2 = self.xyxy
-        polygons = self.unrotated_polygons
-        polygons = polygons.reshape(-1, 4, 2)
-        print(self.polygon_aspect_ratio, self.xyxy)
-        print(polygons[:, :, 0] - x1)
-        print()
-        if self.polygon_aspect_ratio < 1:
-            left_std = abs(np.std(polygons[:, :2, 1] - y1))
-            right_std = abs(np.std(polygons[:, 2:, 1] - y2))
-            center_std = abs(np.std(((polygons[:, :, 1] + polygons[:, :, 1]) - (y2 - y1)) / 2))
-            print(center_std)
-            print('a', left_std, right_std, center_std)
-        else:
-            left_std = abs(np.std(polygons[:, ::2, 0] - x1))
-            right_std = abs(np.std(polygons[:, 2:, 0] - x2))
-            center_std = abs(np.std(((polygons[:, :, 0] + polygons[:, :, 0]) - (x2 - x1)) / 2))
-        min_std = min(left_std, right_std, center_std)
-        if left_std == min_std:
-            return 'left'
-        elif right_std == min_std:
-            return 'right'
-        else:
+        if LANGAUGE_ORIENTATION_PRESETS[self.target_lang] == 'h':
             return 'center'
+        else:
+            return 'left'
+
+        # x1, y1, x2, y2 = self.xyxy
+        # polygons = self.unrotated_polygons
+        # polygons = polygons.reshape(-1, 4, 2)
+        # print(self.polygon_aspect_ratio, self.xyxy)
+        # print(polygons[:, :, 0] - x1)
+        # print()
+        # if self.polygon_aspect_ratio < 1:
+        #     left_std = abs(np.std(polygons[:, :2, 1] - y1))
+        #     right_std = abs(np.std(polygons[:, 2:, 1] - y2))
+        #     center_std = abs(np.std(((polygons[:, :, 1] + polygons[:, :, 1]) - (y2 - y1)) / 2))
+        #     print(center_std)
+        #     print('a', left_std, right_std, center_std)
+        # else:
+        #     left_std = abs(np.std(polygons[:, ::2, 0] - x1))
+        #     right_std = abs(np.std(polygons[:, 2:, 0] - x2))
+        #     center_std = abs(np.std(((polygons[:, :, 0] + polygons[:, :, 0]) - (x2 - x1)) / 2))
+        # min_std = min(left_std, right_std, center_std)
+        # if left_std == min_std:
+        #     return 'left'
+        # elif right_std == min_std:
+        #     return 'right'
+        # else:
+        #     return 'center'
 
     @property
     def stroke_width(self):

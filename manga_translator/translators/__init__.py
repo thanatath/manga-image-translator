@@ -32,6 +32,7 @@ VALID_LANGUAGES = {
     'TRK': 'Turkish',
     'UKR': 'Ukrainian',
     'VIN': 'Vietnamese',
+    'TH': 'Thailand',
 }
 
 OFFLINE_TRANSLATORS = {

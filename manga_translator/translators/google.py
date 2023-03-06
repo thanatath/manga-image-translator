@@ -90,6 +90,7 @@ class GoogleTranslator(CommonTranslator):
         'ESP': 'es',
         'TRK': 'tr',
         'UKR': 'uk',
+        'TH': 'th',
     }
 
     def __init__(self, service_urls=DEFAULT_CLIENT_SERVICE_URLS, user_agent=DEFAULT_USER_AGENT,

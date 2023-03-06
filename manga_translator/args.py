@@ -58,10 +58,17 @@ parser.add_argument('--box-threshold', default=0.7, type=float, help='Threshold 
 parser.add_argument('--text-threshold', default=0.5, type=float, help='Threshold for text detection')
 parser.add_argument('--text-mag-ratio', default=1, type=int, help='Text rendering magnification ratio, larger means higher quality')
 parser.add_argument('--font-size-offset', default=0, type=int, help='Offset font size by a given amount, positive number increase font size and vice versa')
+parser.add_argument('--font-size-minimum', default=10, type=int, help='Minimum output font size')
 
 g = parser.add_mutually_exclusive_group()
 g.add_argument('--force-horizontal', action='store_true', help='Force text to be rendered horizontally')
 g.add_argument('--force-vertical', action='store_true', help='Force text to be rendered vertically')
+parser.add_argument_group(g)
+
+g = parser.add_mutually_exclusive_group()
+g.add_argument('--align-left', action='store_true', help='Align rendered text left')
+g.add_argument('--align-center', action='store_true', help='Align rendered text centered')
+g.add_argument('--align-right', action='store_true', help='Align rendered text right')
 parser.add_argument_group(g)
 
 parser.add_argument('--upscale-ratio', default=None, type=int, choices=[1, 2, 4, 8, 16, 32], help='Image upscale ratio applied before detection. Can improve text detection.')
